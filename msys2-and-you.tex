@@ -1,0 +1,153 @@
+%% vim:tw=66:spell:wrap:ft=tex:
+\ifx \printpresenthandout \undefined
+	\ifx \printpresentarticle \undefined
+		% no handout and no article
+		\documentclass{beamer}
+	\else
+		% print article
+		\documentclass[11pt]{article}
+		\usepackage{beamerarticle}
+	\fi
+\else
+	% handout
+	\documentclass[handout]{beamer}
+\fi
+% Preamble
+\input{preamble/present-helper.tex}
+
+\begin{document}
+% {{{ Meta
+% meta needs to be in \begin{document} so that tabular works
+\input{meta/present.tex}
+%% transitions are made transparent rather than hidden
+\setbeamercovered{transparent}
+%  - Title slide.%{{{
+\frame{\titlepage}
+%}}}
+
+\section{Problem}
+\begin{frame}\frametitle{\secname}
+	\begin{description}
+		\item[P0] You have Perl code that needs to run on
+			Windows (e.g., user requirements,
+			Windows-only software/hardware support).
+		\pause
+		\item[P1] It can't be done in pure-Perl.
+		\pause
+		\item[P2] It requires many tricky-to-install
+			native dependencies.
+	\end{description}
+\end{frame}
+
+\section{Terminology}
+\begin{frame}\frametitle{\secname}
+\begin{itemize}[<+->]
+	\item \href{https://www.cygwin.com/}{Cygwin}: POSIX-like environment for Windows (uses
+		\texttt{cygwin1.dll}).
+	\item \href{http://mingw.org/}{MinGW}: GCC-based toolchain for Windows (32/64-bit)
+	\item MSYS: part of the MinGW project; shell and utilities forked from Cygwin a long
+		time ago (e.g., run \texttt{./configure}).
+	\item \href{https://www.msys2.org/}{MSYS2}: project to combine MinGW with updates from
+		Cygwin and a package manager.
+	\item Other approaches: \href{https://docs.microsoft.com/windows/wsl}{Windows Subsystem for Linux}.
+\end{itemize}
+\end{frame}
+
+\section{Who uses MSYS2}
+\begin{frame}\frametitle{\secname}
+\begin{itemize}
+	\item \href{https://cran.r-project.org/bin/windows/Rtools/}{Rtools}
+		(starting with R 4.0.0),
+	\item \href{https://github.com/oneclick/rubyinstaller2}{RubyInstaller},
+	\item \href{https://pygobject.readthedocs.io/en/latest/getting_started.html#windows-getting-started}{PyGObject},
+	\ldots
+	\item and several other FOSS projects recommend it
+		as their build environment.
+\end{itemize}
+\end{frame}
+
+\section{Installing All Your Base}
+\defverbatim\pacmanInstallPerl{
+\small
+\begin{verbatim}
+pacman -S mingw-w64-x86_64-perl mingw-w64-x86_64-toolchain
+\end{verbatim}
+}
+\begin{frame}\frametitle{\secname}
+\begin{itemize}
+	\item Go to \url{https://www.msys2.org/} and follow the
+		installation instructions (or use the
+		\href{https://chocolatey.org/packages/msys2}{Chocolatey}
+		to automate).
+	\pause\item Open a terminal for one of the subsystems:
+		\begin{description}
+			\item[MSYS] For building code that
+				requires the compatibility layer.
+			\item[MINGW32] For 32-bit code.
+			\item[MINGW64] For 64-bit code. This is
+				most likely what you want.
+		\end{description}
+	\pause\item Install Perl for MINGW64 and the toolchain (for compiling XS)
+		\pacmanInstallPerl
+\end{itemize}
+\end{frame}
+
+\section{Install your packages\ldots for great justice.}
+\defverbatim\pacmanSearch{
+\small
+\begin{verbatim}
+pacman -Ss <query>
+\end{verbatim}
+}
+\defverbatim\pacmanInstall{
+\small
+\begin{verbatim}
+pacman -S mingw-w64-x86_64-gstreamer \
+  mingw-w64-x86_64-gst-plugins-base \
+  mingw-w64-x86_64-gst-plugins-good \
+  mingw-w64-x86_64-gobject-introspection
+\end{verbatim}
+}
+\begin{frame}\frametitle{\secname}
+\begin{itemize}[<+->]
+	\item Find your package by either browsing
+		\url{https://github.com/msys2/MINGW-packages} or
+		searching at the prompt:
+		\pacmanSearch
+	\items Examples: SDL2, FFTW, GStreamer.
+	\item Install the packages
+		\pacmanInstall
+\end{itemize}
+\end{frame}
+
+\section{Further information}
+\begin{frame}\frametitle{\secname}
+	\begin{itemize}
+		\item Steps on building \texttt{Gtk3.pm}
+			\url{http://project-renard.github.io/doc/development/meeting-log/posts/2016/05/03/windows-build-with-msys2/}.
+		\item Script that automates installation of
+			\texttt{Gtk3.pm}: \url{https://github.com/MaxPerl/perl-Gtk3-windows-installer}.
+	\end{itemize}
+\end{frame}
+
+
+\section{Questions / Contact}
+\begin{frame}\frametitle{\secname}
+Reach out
+\begin{itemize}
+	\item on IRC: \texttt{sivoais} on \url{irc://irc.perl.org/#native} (we can also chat
+		about Alien and FFI!),
+	\item on Twitter: \href{https://twitter.com/zmughal}{@zmughal},
+	\item on GitHub: \url{https://github.com/zmughal}.
+\end{itemize}
+\end{frame}
+
+
+%%% }}}
+%%% {{{ END
+
+% Blank frame
+%\begin{frame}\frametitle{\secname}
+%\end{frame}
+
+\end{document}

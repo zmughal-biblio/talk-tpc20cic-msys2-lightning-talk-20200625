@@ -1,0 +1,122 @@
+%\usepackage[small,sf,bf]{titlesec}
+\input{preamble/common.tex}
+
+\usepackage{hyperref}
+\hypersetup{%
+	pdfauthor={Zakariyya Mughal},%
+	pdfpagemode={UseNone},%
+	pdfpagelayout={SinglePage}%
+}
+
+
+\usetheme{Ilmenau}
+\usecolortheme{beaver}
+\usepackage{ifxetex}
+
+\ifxetex
+	% set font to Tahoma
+	\usefonttheme{professionalfonts} % using non standard fonts for beamer
+	\usefonttheme{serif} % default family is serif
+	\usepackage{fontspec}
+\else
+	\usepackage[T1]{fontenc}
+\fi
+
+% Title on title slide
+\setbeamerfont{title}{size = \Large}
+\setbeamercolor{title}{fg = black, bg = white}
+
+\setbeamertemplate{headline}{}
+\beamertemplatenavigationsymbolsempty
+
+%\usefonttheme[onlymath]{serif}
+\ifx \printpresentarticle \undefined
+	\setbeamertemplate{frametitle}[default][center]
+	\setbeamertemplate{footline}{}
+	%\setbeamertemplate{footline}[frame number]
+
+	%% Change beamer bullets to circles rather than the ball default
+	\setbeamertemplate{itemize items}[circle]
+	\setbeamertemplate{enumerate items}[circle]
+\fi
+
+
+\usepackage{textcomp}
+\usepackage{fancyvrb}
+\usepackage{changepage}
+\usepackage{multicol}
+\usepackage{wasysym}
+\usepackage{listings}
+
+\lstset{%basicstyle=\small\ttfamily,
+%numbers=left,
+%escapeinside=||
+}
+\newenvironment{indented}{\begin{adjustwidth}{1.5em}{}}{\end{adjustwidth}}
+
+% http://tex.stackexchange.com/questions/12550/changing-default-width-of-blocks-in-beamer/12551#12551
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\ifx \printpresentnote \undefined
+% no notes
+\else
+\setbeameroption{show only notes}
+\fi
+
+%% use as
+%%     \af{ number of overlay }{ slide label }
+%% e.g.,
+%%     \af{2}{intro-slide}
+\newcommand{\af}[2]{\againframe<#1|handout:0>[noframenumbering]{#2}}
+
+%% TikZ arrows
+%% From <https://tex.stackexchange.com/questions/61507/drawing-arrows-in-beamer>
+\tikzset{
+    myarrow/.style={
+        draw,
+        fill=orange,
+        single arrow,
+        minimum height=3.5ex,
+        single arrow head extend=1ex
+    }
+}
+\newcommand{\arrowup}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=90] {};}
+}
+\newcommand{\arrowdown}{%
+\tikz [baseline=-1ex]{\node [myarrow,rotate=-90] {};}
+}
+\newcommand{\arrowright}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=0] {};}
+}
+\newcommand{\arrowleft}{%
+\tikz [baseline=-0.5ex]{\node [myarrow,rotate=180] {};}
+}
+
+
+%% no "Figure" in \caption{}
+%% simple caption
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+%% with color
+%\setbeamertemplate{caption}{%
+%\begin{beamercolorbox}[wd=.5\paperwidth, sep=.2ex]{block
+%body}\insertcaption%
+%\end{beamercolorbox}%
+%}
+
+\usepackage{listings}
+\lstset{language=Shell,%
+basicstyle=\footnotesize\singlespacing%
+}
+
+\usepackage[toc,acronym]{glossaries}
+
+\usepackage{qrcode}

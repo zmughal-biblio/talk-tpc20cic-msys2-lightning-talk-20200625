@@ -1,0 +1,40 @@
+# LaTeX aux {{{
+*.aux
+*.log
+## front-matter, toc, list of figures, list of tables, outline
+*.toc
+*.lof
+*.lot
+*.out
+## latexmk
+*.fdb_latexmk
+*.fls
+## bibtex, biblatex, biber
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+## glossaries
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.acn
+*.acr
+## algorithms
+*.alg
+*.loa
+## beamer
+*.nav
+*.snm
+*.vrb
+## synctex
+*.synctex.gz
+## xwatermark
+*.xwm
+# }}}
+
+*.synctex.gz
+/draft-pdf/
+/gfx-out/
