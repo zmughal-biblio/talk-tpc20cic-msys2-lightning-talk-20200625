@@ -7,6 +7,12 @@ date: 2020-06-25
 
 # MSYS2 and You: Easier Windows Native Dependencies
 
+## Abstract
+
+> Deploying Perl on Windows with certain native dependencies can be tricky. This talk shows how to use MSYS2 to access many of the same packages as on Unix-likes which opens up some interesting possibilities.
+
+## Video
+
 [![Talk video](http://img.youtube.com/vi/s43DLnzoYeg/0.jpg)](https://www.youtube.com/watch?v=s43DLnzoYeg)
 
 ## Resources
