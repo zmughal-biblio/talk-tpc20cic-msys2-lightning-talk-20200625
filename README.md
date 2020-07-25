@@ -18,6 +18,7 @@ date: 2020-06-25
 ## Resources
 
 - [MSYS2 website](https://www.msys2.org/).
+- [MSYS2 introduction](https://www.msys2.org/wiki/MSYS2-introduction/).
 - Steps on building `Gtk3.pm`: <http://project-renard.github.io/doc/development/meeting-log/posts/2016/05/03/windows-build-with-msys2/>.
 - Script that automates installation of `Gtk3.pm`: <https://github.com/MaxPerl/perl-Gtk3-windows-installer>.
 
